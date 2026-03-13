@@ -19,8 +19,8 @@ describe('ResultGenerator', () => {
 
   beforeEach(() => {
     // Setup URL mocks
-    (global as any).URL.createObjectURL = mockCreateObjectURL;
-    (global as any).URL.revokeObjectURL = mockRevokeObjectURL;
+    (globalThis as any).URL.createObjectURL = mockCreateObjectURL;
+    (globalThis as any).URL.revokeObjectURL = mockRevokeObjectURL;
 
     // Mock document.createElement for anchor element
     const originalCreateElement = document.createElement.bind(document);
@@ -183,7 +183,7 @@ describe('ResultGenerator', () => {
 
       // Verify Blob was created
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(1);
-      const blobArg = mockCreateObjectURL.mock.calls[0]?.[0];
+      const blobArg = mockCreateObjectURL.mock.calls[0]?.[0] as Blob | undefined;
       expect(blobArg).toBeInstanceOf(Blob);
       expect(blobArg?.type).toBe('text/plain;charset=utf-8');
     });

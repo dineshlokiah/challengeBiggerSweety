@@ -2,6 +2,10 @@
 
 A lightweight, mobile-responsive web application for gamified math learning through timed question marathons.
 
+**Created by Dinesh Lokiah**
+
+---
+
 ## Project Structure
 
 ```
@@ -71,3 +75,13 @@ This application validates Requirements 11.1 and 11.2:
 - Operates entirely in browser memory (no backend storage)
 - No server communication required
 - Client-side file generation for reports
+
+## Author
+
+**Dinesh Lokiah**
+
+© 2025 All rights reserved
+
+## License
+
+This project is proprietary software. All rights reserved.

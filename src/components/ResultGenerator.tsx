@@ -295,6 +295,20 @@ Total Time: ${formatTime(results.totalTime)}
             Start New Marathon
           </button>
         )}
+
+        {/* Credits */}
+        <div style={{
+          marginTop: '48px',
+          paddingTop: '24px',
+          borderTop: '1px solid #34495E',
+          fontSize: '14px',
+          color: '#95A5A6'
+        }}>
+          <p>Created by Dinesh Lokiah</p>
+          <p style={{ marginTop: '4px', fontSize: '12px' }}>
+            © {new Date().getFullYear()} All rights reserved
+          </p>
+        </div>
       </div>
     </div>
   );

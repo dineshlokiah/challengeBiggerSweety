@@ -2,6 +2,7 @@
   "name": "challenge-bigger-sweety",
   "version": "1.0.0",
   "description": "A lightweight, mobile-responsive web application for gamified math learning through timed question marathons",
+  "author": "Dinesh Lokiah",
   "type": "module",
   "scripts": {
     "dev": "vite",

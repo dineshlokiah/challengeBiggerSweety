@@ -248,7 +248,7 @@ describe('App Component', () => {
   describe('Client-Side Only Operation', () => {
     it('should operate without server communication', async () => {
       // Mock fetch to ensure no network requests
-      const fetchSpy = vi.spyOn(global, 'fetch');
+      const fetchSpy = vi.spyOn((global as any), 'fetch');
 
       render(<App />);
 
