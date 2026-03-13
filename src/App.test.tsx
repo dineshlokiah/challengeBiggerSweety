@@ -7,7 +7,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 import { marathonStore } from './store/MarathonStore';
-import { MarathonConfig, MarathonResults } from './types';
+import { MarathonConfig } from './types';
 
 // Mock child components
 vi.mock('./components', () => ({

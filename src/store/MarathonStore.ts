@@ -3,7 +3,7 @@
  * Validates: Requirements 11.1, 11.2, 11.4, 11.5
  */
 
-import { MarathonConfig, MarathonResults, MarathonState, Question, QuestionResult } from '../types';
+import { MarathonConfig, MarathonResults, MarathonState } from '../types';
 
 type AppScreen = 'configuration' | 'marathon' | 'results';
 

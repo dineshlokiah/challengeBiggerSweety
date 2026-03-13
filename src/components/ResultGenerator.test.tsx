@@ -19,8 +19,8 @@ describe('ResultGenerator', () => {
 
   beforeEach(() => {
     // Setup URL mocks
-    global.URL.createObjectURL = mockCreateObjectURL;
-    global.URL.revokeObjectURL = mockRevokeObjectURL;
+    (global as any).URL.createObjectURL = mockCreateObjectURL;
+    (global as any).URL.revokeObjectURL = mockRevokeObjectURL;
 
     // Mock document.createElement for anchor element
     const originalCreateElement = document.createElement.bind(document);
@@ -28,6 +28,7 @@ describe('ResultGenerator', () => {
       if (tagName === 'a') {
         const mockLink = originalCreateElement('a');
         mockLink.click = vi.fn();
+        mockLink.download = '';
         return mockLink;
       }
       return originalCreateElement(tagName);
@@ -182,9 +183,9 @@ describe('ResultGenerator', () => {
 
       // Verify Blob was created
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(1);
-      const blobArg = mockCreateObjectURL.mock.calls[0][0];
+      const blobArg = mockCreateObjectURL.mock.calls[0]?.[0];
       expect(blobArg).toBeInstanceOf(Blob);
-      expect(blobArg.type).toBe('text/plain;charset=utf-8');
+      expect(blobArg?.type).toBe('text/plain;charset=utf-8');
     });
 
     it('should include date in report content', async () => {
@@ -193,7 +194,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blob = mockCreateObjectURL.mock.calls[0][0] as Blob;
+      const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
       expect(text).toContain('Date: 2024-01-15');
@@ -205,7 +206,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blob = mockCreateObjectURL.mock.calls[0][0] as Blob;
+      const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
       // Check that time field exists (timezone-agnostic)
@@ -218,7 +219,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blob = mockCreateObjectURL.mock.calls[0][0] as Blob;
+      const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
       expect(text).toContain('Subject: Addition');
@@ -230,7 +231,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blob = mockCreateObjectURL.mock.calls[0][0] as Blob;
+      const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
       expect(text).toContain('Number A Digits: 2');
@@ -243,7 +244,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blob = mockCreateObjectURL.mock.calls[0][0] as Blob;
+      const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
       expect(text).toContain('Total Score: 1.5 / 3');
@@ -255,7 +256,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blob = mockCreateObjectURL.mock.calls[0][0] as Blob;
+      const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
       expect(text).toContain('Percentage: 50.0%');
@@ -267,7 +268,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blob = mockCreateObjectURL.mock.calls[0][0] as Blob;
+      const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
       expect(text).toContain('Total Time: 02:05');
@@ -279,7 +280,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blob = mockCreateObjectURL.mock.calls[0][0] as Blob;
+      const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
       expect(text).toContain('challengeBiggerSweety Marathon Report');
@@ -305,7 +306,7 @@ describe('ResultGenerator', () => {
       
       // Get the created anchor element from the mock results
       const mockLink = (document.createElement as any).mock.results.find(
-        (result: any, index: number) => createElementCalls[index][0] === 'a'
+        (_: any, index: number) => createElementCalls[index][0] === 'a'
       )?.value as HTMLAnchorElement;
       
       expect(mockLink.download).toContain('marathon-report-');
@@ -322,7 +323,7 @@ describe('ResultGenerator', () => {
       // Get the mock calls to createElement
       const createElementCalls = (document.createElement as any).mock.calls;
       const mockLink = (document.createElement as any).mock.results.find(
-        (result: any, index: number) => createElementCalls[index][0] === 'a'
+        (_: any, index: number) => createElementCalls[index][0] === 'a'
       )?.value as HTMLAnchorElement;
       
       // Filename should not contain colons (replaced with hyphens)
@@ -338,7 +339,7 @@ describe('ResultGenerator', () => {
       const button = screen.getByRole('button', { name: /claim your medal/i });
       fireEvent.click(button);
 
-      const blobArg = mockCreateObjectURL.mock.calls[0][0];
+      const blobArg = mockCreateObjectURL.mock.calls[0]?.[0];
       expect(blobArg).toBeInstanceOf(Blob);
     });
 
@@ -360,7 +361,7 @@ describe('ResultGenerator', () => {
       // Get the mock calls to createElement
       const createElementCalls = (document.createElement as any).mock.calls;
       const mockLink = (document.createElement as any).mock.results.find(
-        (result: any, index: number) => createElementCalls[index][0] === 'a'
+        (_: any, index: number) => createElementCalls[index][0] === 'a'
       )?.value as HTMLAnchorElement;
       
       expect(mockLink.click).toHaveBeenCalled();
@@ -487,7 +488,7 @@ describe('ResultGenerator', () => {
     it('should apply mobile-responsive styling', () => {
       const { container } = render(<ResultGenerator results={mockResults} />);
       
-      const mainDiv = container.firstChild as HTMLElement;
+      const mainDiv = container?.firstChild as HTMLElement;
       const styles = window.getComputedStyle(mainDiv);
       
       expect(styles.minHeight).toBe('100vh');
@@ -500,7 +501,7 @@ describe('ResultGenerator', () => {
     it('should use deep navy background color', () => {
       const { container } = render(<ResultGenerator results={mockResults} />);
       
-      const mainDiv = container.firstChild as HTMLElement;
+      const mainDiv = container?.firstChild as HTMLElement;
       const styles = window.getComputedStyle(mainDiv);
       
       expect(styles.backgroundColor).toBe('rgb(44, 62, 80)'); // #2C3E50

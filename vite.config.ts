@@ -8,4 +8,5 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/utils/test-setup.ts',
   },
+  base: '/challengeBiggerSweety/',
 });
