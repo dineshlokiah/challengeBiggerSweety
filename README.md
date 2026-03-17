@@ -1,8 +1,10 @@
-# challengeBiggerSweety
+# challengeandgrow
 
 A lightweight, mobile-responsive web application for gamified math learning through timed question marathons.
 
 **Created by Dinesh Lokiah**
+
+> 🔒 We do not send your data to our servers. All data stays on your device.
 
 ---
 

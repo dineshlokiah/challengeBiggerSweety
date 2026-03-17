@@ -1,5 +1,5 @@
 /**
- * Component exports for challengeBiggerSweety
+ * Component exports for challengeandgrow
  */
 
 export { Timer } from './Timer';

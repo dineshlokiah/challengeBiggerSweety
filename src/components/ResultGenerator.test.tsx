@@ -283,7 +283,7 @@ describe('ResultGenerator', () => {
       const blob = mockCreateObjectURL.mock.calls[0]?.[0] as Blob;
       const text = await blob.text();
       
-      expect(text).toContain('challengeBiggerSweety Marathon Report');
+      expect(text).toContain('challengeandgrow Marathon Report');
       expect(text).toContain('=====================================');
       expect(text).toContain('Date:');
       expect(text).toContain('Time:');

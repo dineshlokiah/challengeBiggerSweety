@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Marathon Store is a client-side only state management solution for the challengeBiggerSweety application. It provides centralized state management for routing between screens and maintaining marathon data entirely in browser memory.
+The Marathon Store is a client-side only state management solution for the challengeandgrow application. It provides centralized state management for routing between screens and maintaining marathon data entirely in browser memory.
 
 ## Architecture
 

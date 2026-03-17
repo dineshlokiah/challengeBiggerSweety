@@ -1,5 +1,5 @@
 /**
- * Main entry point for challengeBiggerSweety application
+ * Main entry point for challengeandgrow application
  */
 import React from 'react';
 import ReactDOM from 'react-dom/client';

@@ -1,5 +1,5 @@
 /**
- * Core type definitions for challengeBiggerSweety
+ * Core type definitions for challengeandgrow
  * Validates: Requirements 11.1, 11.2
  */
 

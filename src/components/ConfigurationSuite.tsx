@@ -44,8 +44,20 @@ const ConfigurationSuite: React.FC<ConfigurationSuiteProps> = ({ onStartMarathon
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>challengeBiggerSweety</h1>
+      <h1 style={styles.title}>challengeandgrow</h1>
       <p style={styles.subtitle}>Configure Your Math Marathon</p>
+      <p style={{
+        fontSize: '11px',
+        color: 'rgba(255,255,255,0.5)',
+        marginBottom: '1.5rem',
+        backgroundColor: 'rgba(46, 204, 113, 0.15)',
+        border: '1px solid rgba(46, 204, 113, 0.3)',
+        borderRadius: '6px',
+        padding: '6px 12px',
+        textAlign: 'center',
+      }}>
+        🔒 Your data never leaves your device — we do not send your data to our servers.
+      </p>
 
       <div style={styles.configSection}>
         {/* Subject Selection */}

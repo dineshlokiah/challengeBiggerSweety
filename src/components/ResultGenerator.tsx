@@ -52,7 +52,7 @@ export const ResultGenerator: React.FC<ResultGeneratorProps> = ({
     const time = results.completedAt.toTimeString().split(' ')[0]; // HH:MM:SS
     const maxScore = results.questionResults.length;
 
-    return `challengeBiggerSweety Marathon Report
+    return `challengeandgrow Marathon Report
 =====================================
 Date: ${date}
 Time: ${time}
@@ -305,6 +305,9 @@ Total Time: ${formatTime(results.totalTime)}
           color: '#95A5A6'
         }}>
           <p>Created by Dinesh Lokiah</p>
+          <p style={{ marginTop: '6px', fontSize: '11px', color: '#2ECC71', backgroundColor: 'rgba(46,204,113,0.1)', borderRadius: '6px', padding: '6px 10px', border: '1px solid rgba(46,204,113,0.3)' }}>
+            🔒 We do not send your data to our servers. Everything stays on your device.
+          </p>
           <p style={{ marginTop: '4px', fontSize: '12px' }}>
             © {new Date().getFullYear()} All rights reserved
           </p>
