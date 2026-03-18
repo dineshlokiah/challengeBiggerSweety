@@ -11,6 +11,7 @@ build/
 .env.*.local
 
 # Editor directories and files
+.kiro/
 .vscode/
 .idea/
 *.suo
