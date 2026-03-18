@@ -4,6 +4,7 @@ node_modules/
 # Build output
 dist/
 build/
+prompts/
 
 # Environment variables
 .env
@@ -19,6 +20,7 @@ build/
 *.njsproj
 *.sln
 *.sw?
+
 
 # OS files
 .DS_Store
@@ -39,3 +41,4 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
