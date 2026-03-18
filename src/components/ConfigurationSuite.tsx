@@ -94,11 +94,7 @@ const ConfigurationSuite: React.FC<ConfigurationSuiteProps> = ({ onStartMarathon
       <p style={styles.privacyNote}>
         🔒 Your data never leaves your device — we do not send your data to our servers.
       </p>
-      <img
-        src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fdineshlokiah.github.io%2Fchallengeandgrow&count_bg=%23FF8C00&title_bg=%232C3E50&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=false"
-        alt="Visitor count"
-        style={{ marginBottom: '1rem', height: '20px' }}
-      />
+
 
       <div style={styles.configSection}>
 
