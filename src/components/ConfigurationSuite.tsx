@@ -14,13 +14,13 @@ type PresetVolume = 10 | 20 | 50 | 'endless';
 type PresetSpeed = 10 | 30 | 60;
 type PresetDigit = 1 | 2 | 3 | 4;
 
-const SUBJECT_OPTIONS: { value: Subject; label: string; symbol: string }[] = [
-  { value: 'addition', label: 'Addition', symbol: '+' },
-  { value: 'subtraction', label: 'Subtraction', symbol: '−' },
-  { value: 'multiplication', label: 'Multiply', symbol: '×' },
-  { value: 'division', label: 'Division', symbol: '÷' },
-  { value: 'greater-than-lesser-than', label: 'Compare', symbol: '><' },
-  { value: 'fill-the-missing-number', label: 'Fill Gap', symbol: '?' },
+const SUBJECT_OPTIONS: { value: Subject; label: string; icon: string }[] = [
+  { value: 'addition', label: 'Addition', icon: '➕' },
+  { value: 'subtraction', label: 'Subtraction', icon: '➖' },
+  { value: 'multiplication', label: 'Multiply', icon: '✖️' },
+  { value: 'division', label: 'Division', icon: '➗' },
+  { value: 'greater-than-lesser-than', label: 'Compare', icon: '⚖️' },
+  { value: 'fill-the-missing-number', label: 'Fill Gap', icon: '🔍' },
 ];
 
 const ConfigurationSuite: React.FC<ConfigurationSuiteProps> = ({ onStartMarathon }) => {
@@ -106,11 +106,11 @@ const ConfigurationSuite: React.FC<ConfigurationSuiteProps> = ({ onStartMarathon
               <button
                 key={s.value}
                 onClick={() => setSubject(s.value)}
-                style={{ ...styles.optionButton, ...(subject === s.value ? styles.selected : {}) }}
+                style={{ ...styles.optionButton, ...styles.subjectButton, ...(subject === s.value ? styles.selected : {}) }}
                 aria-pressed={subject === s.value}
               >
-                <span style={{ fontSize: '20px' }}>{s.symbol}</span>
-                <span style={styles.optionLabel}>{s.label}</span>
+                <span style={styles.subjectIcon}>{s.icon}</span>
+                <span style={styles.subjectLabel}>{s.label}</span>
               </button>
             ))}
           </div>
@@ -188,15 +188,15 @@ const ConfigurationSuite: React.FC<ConfigurationSuiteProps> = ({ onStartMarathon
           </div>
         </div>
 
-        {/* Questions */}
+        {/* Number of Questions */}
         <div style={styles.parameterGroup}>
-          <h2 style={styles.parameterLabel}>Questions</h2>
-          <div style={styles.buttonGrid}>
+          <h2 style={styles.parameterLabel}>Number of Questions</h2>
+          <div style={styles.inlineRow}>
             {([10, 20, 50] as PresetVolume[]).map((v) => (
               <button
                 key={v}
                 onClick={() => { setPresetVolume(v); setUseCustomVolume(false); }}
-                style={{ ...styles.optionButton, ...(!useCustomVolume && presetVolume === v ? styles.selected : {}) }}
+                style={{ ...styles.optionButton, ...styles.compactButton, ...(!useCustomVolume && presetVolume === v ? styles.selected : {}) }}
                 aria-pressed={!useCustomVolume && presetVolume === v}
               >
                 {v}
@@ -204,51 +204,49 @@ const ConfigurationSuite: React.FC<ConfigurationSuiteProps> = ({ onStartMarathon
             ))}
             <button
               onClick={() => { setPresetVolume('endless'); setUseCustomVolume(false); }}
-              style={{ ...styles.optionButton, ...(!useCustomVolume && presetVolume === 'endless' ? styles.selected : {}) }}
+              style={{ ...styles.optionButton, ...styles.compactButton, ...(!useCustomVolume && presetVolume === 'endless' ? styles.selected : {}) }}
               aria-pressed={!useCustomVolume && presetVolume === 'endless'}
             >
               ∞
             </button>
-          </div>
-          <div style={{ marginTop: '12px' }}>
-            <p style={styles.customLabel}>Custom:</p>
-            <Stepper
-              value={customVolume}
-              min={1}
-              max={999}
-              step={1}
-              label="Custom question count"
-              onChange={(v) => { setCustomVolume(v); setUseCustomVolume(true); setPresetVolume(null); }}
-            />
+            <div style={styles.inlineStepper}>
+              <Stepper
+                value={customVolume}
+                min={1}
+                max={999}
+                step={1}
+                label="Custom question count"
+                onChange={(v) => { setCustomVolume(v); setUseCustomVolume(true); setPresetVolume(null); }}
+              />
+            </div>
           </div>
         </div>
 
         {/* Time Per Question */}
         <div style={styles.parameterGroup}>
           <h2 style={styles.parameterLabel}>Time Per Question</h2>
-          <div style={styles.buttonGrid}>
+          <div style={styles.inlineRow}>
             {([10, 30, 60] as PresetSpeed[]).map((s) => (
               <button
                 key={s}
                 onClick={() => { setPresetSpeed(s); setUseCustomSpeed(false); }}
-                style={{ ...styles.optionButton, ...(!useCustomSpeed && presetSpeed === s ? styles.selected : {}) }}
+                style={{ ...styles.optionButton, ...styles.compactButton, ...(!useCustomSpeed && presetSpeed === s ? styles.selected : {}) }}
                 aria-pressed={!useCustomSpeed && presetSpeed === s}
               >
                 {s}s
               </button>
             ))}
-          </div>
-          <div style={{ marginTop: '12px' }}>
-            <p style={styles.customLabel}>Custom:</p>
-            <Stepper
-              value={customSpeed}
-              min={5}
-              max={300}
-              step={5}
-              unit="s"
-              label="Custom time per question"
-              onChange={(v) => { setCustomSpeed(v); setUseCustomSpeed(true); setPresetSpeed(null); }}
-            />
+            <div style={styles.inlineStepper}>
+              <Stepper
+                value={customSpeed}
+                min={5}
+                max={300}
+                step={5}
+                unit="s"
+                label="Custom time per question"
+                onChange={(v) => { setCustomSpeed(v); setUseCustomSpeed(true); setPresetSpeed(null); }}
+              />
+            </div>
           </div>
         </div>
 
@@ -423,6 +421,39 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: 'rgba(255,255,255,0.6)',
     marginBottom: '8px',
     textAlign: 'center',
+  },
+  subjectButton: {
+    minHeight: '80px',
+    padding: '14px 10px',
+    borderRadius: '16px',
+    background: 'linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 100%)',
+    boxShadow: '0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.15)',
+  },
+  subjectIcon: {
+    fontSize: '32px',
+    lineHeight: '1',
+    filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+  },
+  subjectLabel: {
+    fontSize: 'clamp(0.65rem, 2vw, 0.85rem)',
+    fontWeight: 600,
+    marginTop: '4px',
+  },
+  inlineRow: {
+    display: 'flex',
+    flexWrap: 'wrap' as const,
+    gap: '8px',
+    width: '100%',
+    alignItems: 'center',
+  },
+  compactButton: {
+    flex: '0 0 auto',
+    minWidth: '56px',
+    padding: '10px 12px',
+  },
+  inlineStepper: {
+    flex: '1 1 160px',
+    minWidth: '160px',
   },
   startButton: {
     minWidth: '200px',
